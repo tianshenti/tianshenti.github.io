@@ -1,0 +1,89 @@
+什么是微信小游戏？
+  基于微信平台开发的，不需要下载安装即可使用的全新游戏应用，体现了“用完即走”的理念。
+  同时基于微信的社交属性，使得小游戏具备较强的社交传播能力
+
+小游戏的特点：
+  1. 快速体验，用完即走(点击分享链接，扫描二维码)，不需要像传统app游戏下载
+  2. 传统app应用涉及窥探用户的隐私，微信小游戏受限于微信，暂没有发现有窥探隐私的行为
+  3. 占用空间小
+  4. 没有卸载残留的问题
+  5. 开发周期短
+  6. 不需要考虑手机操作系统的问题
+  7. 推广方便，分享链接，群分享，朋友圈分享
+
+用户体验方面：
+  碎片化时间的消磨，随时随地玩一会
+  与好友的联动比大部分app方便
+
+缺点：
+  小，内容少，效果不如app好
+  合适棋牌类，休闲类的游戏
+
+    
+项目结构
+
+/---
+  |--index.html 页面，模拟手机的界面
+  |--game.js 小游戏的入口文件
+  |--game.json 小游戏的配置文件(不需要修改)
+  |--project.config.json 项目配置文件(不需要修改)
+  |--Main.js 游戏主类，用于初始化canvas以及一些全局对象
+  |--res/ 保存游戏资源图片的文件夹
+  |--audios/ 保存游戏的背景音乐
+  |--js/  保存小游戏中各个js
+      |--Director.js 导演类，控制游戏的逻辑，主流程
+      |--base/ 游戏过程中基本数据
+          |--Resources.js 获取游戏过程中需要的图片路径
+          |--ResourceLoader.js 资源加载器，保证游戏是在所有图片加载完成之后才开始主循环
+          |--DataStore.js 变量池，保存游戏过程中的数据以及数据的销毁
+          |--Sprite.js 精灵类，是所有图片类的父类
+      |--player/ 保存玩家相关的数据
+          |--Birds.js 小鸟
+          |--Score.js 分数
+          |--StartButton.js 开始按钮
+      |--runtime/ 游戏过程中的数据
+          |--Background.js 背景图
+          |--Land.js 地板
+          |--Pipe.js 水管的父类
+          |--UpPipe.js 上部水管
+          |--DownPipe.js 下部水管
+
+1. index.html
+  定义canvas标签
+  简单设置样式
+  引入了game.js入口文件
+
+2. 定义Main.js
+  export class Main{}
+  在其中定义构造方法constructor(){}
+  在game.js中引入
+  构造中获取canvas，模拟使用canvas画背景图
+
+3. 定义Resources.js
+  定义资源数组，并将其导出
+  export const Resources = [...];
+
+4. 定义ResourceLoader.js
+  export class ResourceLoader{}
+  在构造中定义map集合，获取Resources中的数据
+  遍历map，将其中字符串全部替换为img对象
+  定义onloaded方法，保证图片加载完成后再让Main来执行后续
+
+5. 变量的存取与销毁
+  定义DataStore.js
+  暴露DataStore类
+  定义构造方法
+  定义静态方法 static getInstance(){}
+  保证每个类获取到的变量池都是同一个变量池
+  定义保存、获取、销毁数据的方法
+
+  在Main中加载完成的方法前面获取变量池
+6. 数据的保存
+  将部分数据永久保存在变量池中(该部分数据不随游戏的结束而销毁)
+
+7. 从变量池中获取图片并画在canvas上
+
+
+
+
+
