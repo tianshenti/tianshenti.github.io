@@ -37,9 +37,8 @@ export default class Main {
 	//数据的初始化
 	init(){
 		//创建游戏过程中的使用到的对象,并将其put到变量池中
-		this.dataStore
-						.set("background",new Background())
-						.set("land",new Land())
+		this.dataStore.set("background",new Background())
+					  .set("land",new Land());
 		this.director.run();
 	}
 	

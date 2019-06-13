@@ -4,6 +4,9 @@ import DataStore from "./dataStore.js";
 export default class Sprite{
 	constructor(type=0,img=null,imgX=0,imgY=0,imgW=0,imgH=0,x=0,y=0,w=0,h=0){
 		this.dataStore = DataStore.getInstance();
+
+		
+
 		//角色的类型
 		this.type = type;
 		//角色的图片
@@ -34,8 +37,10 @@ export default class Sprite{
 		//绘制图片
 		this.dataStore.ctx.drawImage(img,imgX,imgY,imgW,imgH,x,y,w,h);
 		//绘制碰撞框
-		this.dataStore.ctx.strokeStyle = "#000";
-		// this.dataStore.ctx.strokeRect(imgX,imgY,imgW,imgH);
+		if(this.type >=3){
+			this.dataStore.ctx.strokeStyle = "red";
+			this.dataStore.ctx.strokeRect(x,y,w,h);
+		}
 	}
 	//获取指定名称的图片
 
