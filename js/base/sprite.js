@@ -32,10 +32,10 @@ export default class Sprite{
 			imgX=this.imgX,imgY=this.imgY,imgW=this.imgW,imgH=this.imgH,
 			x=this.x,y=this.y,w=this.width,h=this.height){
 		//绘制图片
-		this.dataStore.ctx.drawImage(img,imgX,imgY,imgW,imgH);
+		this.dataStore.ctx.drawImage(img,imgX,imgY,imgW,imgH,x,y,w,h);
 		//绘制碰撞框
 		this.dataStore.ctx.strokeStyle = "#000";
-		this.dataStore.ctx.strokeRect(imgX,imgY,imgW,imgH);
+		// this.dataStore.ctx.strokeRect(imgX,imgY,imgW,imgH);
 	}
 	//获取指定名称的图片
 
