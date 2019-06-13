@@ -1,23 +1,23 @@
 import Sprite from "../base/sprite.js";
-import DataStore from "../base/dataStore.js";
-const PIPE_SPEED = 2;
-const PIPE_ACTIVE = 1;
-const PIPE_DEATH = 2;
 
 // 背景图
 export default class Pipe extends Sprite{
     constructor(type=0,img=null,top=0){
-        let dataStore = DataStore.getInstance();
         super(type,img,
             0,0,img.width,img.height,
-            window.innerWidth,top * dataStore.scaleH,img.width/2,img.height * dataStore.scaleH);
-            // window.innerWidth,top,img.width/2,img.height);
-        this.status = PIPE_ACTIVE;
+            window.innerWidth,top * Sprite.getDataStore().scaleH,
+            img.width * Sprite.getDataStore().scaleW / 2, img.height * Sprite.getDataStore().scaleH);
+
+        this.status = Sprite.getDataStore().STATUS_PIPE_ACTIVE;
+        if(type == Sprite.getDataStore().TYPE_UPPIPE){
+            this.status = Sprite.getDataStore().STATUS_PIPE_SCORE;
+        }
+        this.speed = Sprite.getDataStore().PIPE_SPEED;
     }
     drawImage(){
-        this.x -= PIPE_SPEED;
+        this.x -= this.speed;
         if(this.x < -this.img.width){
-            this.status = PIPE_DEATH;
+            this.status = Sprite.getDataStore().STATUS_PIPE_DEATH;
         }
         super.drawImage();
     }
