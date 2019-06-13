@@ -63,26 +63,35 @@ export default class Sprite{
 			this.dataStore.ctx.fillStyle = "rgba(255,0,0,1)";
 			this.dataStore.ctx.font = "20px consolas";
 			this.dataStore.ctx.textAlign ="center";
-			this.dataStore.ctx.fillText("积分:"+ this.dataStore.get("score"),window.innerWidth / 2,window.innerHeight / 2 - 100);
+			this.dataStore.ctx.fillText("积分:"+ this.dataStore.get("scoreNum"),window.innerWidth / 2,window.innerHeight / 2 - 100);
 		}
-		//绘制图片
-		this.dataStore.ctx.drawImage(img,imgX,imgY,imgW,imgH,x,y,w,h);
+		if(this.type != this.dataStore.TYPE_SCORE){
+			//绘制图片
+			this.dataStore.ctx.drawImage(img,imgX,imgY,imgW,imgH,x,y,w,h);
+		}else{
+			//绘制文字
+			this.dataStore.ctx.fillStyle = "rgba(255,0,0,1)";
+			this.dataStore.ctx.font = "bolder 20px consolas";
+			// this.dataStore.ctx.textAlign ="center";
+			this.dataStore.ctx.fillText("积分:"+ this.dataStore.get("scoreNum"), x, y);
+		}
 		//角色的中心点
 		this.centerX = x + w/2;
 		this.centerY = y + h/2;
 		
-		//绘制碰撞框
-		if(this.type >=3){
-			this.dataStore.ctx.strokeStyle = "red";
-			// this.dataStore.ctx.strokeRect(x + 4,y + 4,w - 8,h - 8);
-			this.dataStore.ctx.strokeRect(x + 4,y + 4,this.checkW * 2,this.checkH * 2);
-		}
-		if(this.type == 3){
-			this.dataStore.ctx.fillStyle = "black";
-			this.dataStore.ctx.font = "20px consolas";
-			this.dataStore.ctx.textAlign = "center";
-			this.dataStore.ctx.fillText("" + this.index,this.centerX,this.centerY);
-		}
+		// // //绘制碰撞框
+		// if(this.type >= 2){
+		// 	this.dataStore.ctx.strokeStyle = "red";
+		// 	// this.dataStore.ctx.strokeRect(x + 4,y + 4,w - 8,h - 8);
+		// 	this.dataStore.ctx.strokeRect(x + 4,y + 4,this.checkW * 2,this.checkH * 2);
+		// }
+		// //水管上序号
+		// if(this.type == 3){
+		// 	this.dataStore.ctx.fillStyle = "black";
+		// 	this.dataStore.ctx.font = "20px consolas";
+		// 	this.dataStore.ctx.textAlign = "center";
+		// 	this.dataStore.ctx.fillText("" + this.index,this.centerX,this.centerY);
+		// }
 	}
 	//获取指定名称的图片
 	static getImage(key){

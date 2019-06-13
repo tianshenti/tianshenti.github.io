@@ -11,29 +11,11 @@ export default class DataStore{
         this.scaleW = window.innerWidth / SCREEN_W;
         this.scaleH = window.innerHeight / SCREEN_H;
         console.log("scale : ", this.scaleW,this.scaleH);
-        //地板的移动速度
-        this.LAND_SPEED = 1;
-        //类型
-        this.TYPE_BACKGROUND= 1;
-        this.TYPE_LAND = 2;
-        this.TYPE_UPPIPE = 3;
-        this.TYPE_DOWNPIPE = 4;
-        this.TYPE_BIRD = 5;
-        this.TYPE_START_BTN = 6;
-        //水管的移动速度
-        this.PIPE_SPEED = 2;
-        //水管的状态
-        this.STATUS_PIPE_SCORE = 1;
-        this.STATUS_PIPE_ACTIVE = 2;
-        this.STATUS_PIPE_DEATH = 3;
-        //上下两个水管之间的默认距离 -- 用于下水管的生成
-        this.PIPE_DISTANCE_X = 135;
-        //左右两个水管之间的默认距离 -- 用于右水管的生成
-        this.PIPE_DISTANCE_Y = 80;
         //记录
         this.index = 0;
         //用于判断游戏是否结束
         this.GameOver = false;
+        this.init();
     }
     // 只能创建一个实例对象 : 单例
     // static修饰的方法,可以直接用类名调用
@@ -57,5 +39,29 @@ export default class DataStore{
     //获取数据
     get(key){
         return this.mapThis.get(key);
+    }
+    init(){
+        //小鸟的下落速度
+        this.BIRD_SPEED_Y = 2;
+        //地板的移动速度
+        this.LAND_SPEED = 1;
+        //类型
+        this.TYPE_BACKGROUND= 1;
+        this.TYPE_LAND = 2;
+        this.TYPE_UPPIPE = 3;
+        this.TYPE_DOWNPIPE = 4;
+        this.TYPE_BIRD = 5;
+        this.TYPE_START_BTN = 6;
+        this.TYPE_SCORE = 7;
+        //水管的移动速度
+        this.PIPE_SPEED = 2;
+        //水管的状态
+        this.STATUS_PIPE_SCORE = 1;
+        this.STATUS_PIPE_ACTIVE = 2;
+        this.STATUS_PIPE_DEATH = 3;
+        //上下两个水管之间的默认距离 -- 用于下水管的生成
+        this.PIPE_DISTANCE_X = 135;
+        //左右两个水管之间的默认距离 -- 用于右水管的生成
+        this.PIPE_DISTANCE_Y = 80;
     }
 }
