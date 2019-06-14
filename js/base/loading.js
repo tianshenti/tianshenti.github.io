@@ -5,7 +5,8 @@ export default class Loading{
         //获取所有的资源
         this.map = new Map(Resource);
         for(let [k,v] of this.map){
-            const img = new Image();
+            // const img = new Image();
+            const img = wx.createImage();
             img.src = v;
             this.map.set(k,img);
         }

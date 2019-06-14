@@ -55,24 +55,24 @@ export default class Sprite{
 	drawImage(img=this.img,
 			imgX=this.imgX,imgY=this.imgY,imgW=this.imgW,imgH=this.imgH,
 			x=this.x,y=this.y,w=this.width,h=this.height){
-		//绘制灰色的透明背景
+		//绘制灰色的透明背景 -- 开始按钮
 		if(this.type == this.dataStore.TYPE_START_BTN){
 			this.dataStore.ctx.fillStyle = "rgba(0,0,0,0.5)";
 			this.dataStore.ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
 
 			this.dataStore.ctx.fillStyle = "rgba(255,0,0,1)";
-			this.dataStore.ctx.font = "20px consolas";
+			this.dataStore.ctx.font = 20 * (Math.max(this.dataStore.scaleW,this.dataStore.scaleH)) +"px consolas";
 			this.dataStore.ctx.textAlign ="center";
-			this.dataStore.ctx.fillText("积分:"+ this.dataStore.get("scoreNum"),window.innerWidth / 2,window.innerHeight / 2 - 100);
+			this.dataStore.ctx.fillText("积分:"+ this.dataStore.get("scoreNum"),x + w / 2,y - h / 2);
 		}
 		if(this.type != this.dataStore.TYPE_SCORE){
 			//绘制图片
 			this.dataStore.ctx.drawImage(img,imgX,imgY,imgW,imgH,x,y,w,h);
 		}else{
-			//绘制文字
+			//绘制文字 - 积分
 			this.dataStore.ctx.fillStyle = "rgba(255,0,0,1)";
-			this.dataStore.ctx.font = "bolder 20px consolas";
-			// this.dataStore.ctx.textAlign ="center";
+			this.dataStore.ctx.font = "bolder "+  20 * (Math.max(this.dataStore.scaleW,this.dataStore.scaleH)) +"px consolas";
+			this.dataStore.ctx.textAlign ="start";
 			this.dataStore.ctx.fillText("积分:"+ this.dataStore.get("scoreNum"), x, y);
 		}
 		//角色的中心点

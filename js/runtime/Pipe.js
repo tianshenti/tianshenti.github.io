@@ -1,12 +1,17 @@
-import Sprite from "../base/sprite.js";
+import Sprite from "../base/Sprite.js";
 
 // 背景图
 export default class Pipe extends Sprite{
     constructor(type=0,img=null,top=0){
+        var scaleW = Sprite.getDataStore().scaleW;
+        scaleW = scaleW >= 2.0 ? 2 : scaleW;
+        // console.log("scaleW pipe ************* ",scaleW,Sprite.getDataStore().scaleW);
         super(type,img,
             0,0,img.width,img.height,
             window.innerWidth,top * Sprite.getDataStore().scaleH,
-            img.width * Sprite.getDataStore().scaleW / 2, img.height * Sprite.getDataStore().scaleH);
+            // img.width * Sprite.getDataStore().scaleW / 2,
+            img.width * scaleW  / 2,
+             img.height * Sprite.getDataStore().scaleH);
 
         this.status = Sprite.getDataStore().STATUS_PIPE_ACTIVE;
         if(type == Sprite.getDataStore().TYPE_UPPIPE){

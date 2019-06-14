@@ -1,5 +1,5 @@
 import Pipe from "./Pipe.js";
-import Sprite from "../base/sprite.js";
+import Sprite from "../base/Sprite.js";
 
 // 背景图
 export default class DownPipe extends Pipe{

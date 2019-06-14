@@ -34,9 +34,10 @@ export default class Director{
                         .set("score",new Score());
                     //   .set("startBtn",new StartBtn());
         console.log("GameOver : ",this.dataStore.GameOver)
+        // this.dataStore.canvas.addEventListener("click",this.onTouchStart);
         this.dataStore.canvas.addEventListener("touchstart",this.onTouchStart);
         // this.dataStore.canvas.addEventListener("touchmove",this.touchUp);
-        this.dataStore.canvas.addEventListener("touchend",this.onTouchEnd);
+        // this.dataStore.canvas.addEventListener("touchend",this.onTouchEnd);
     }
     
     onTouchStart = e => {
@@ -46,26 +47,33 @@ export default class Director{
     onTouchEnd = e => {
         // console.log("touchend : ",e);
     }
+    //开始游戏按钮 - 操作
     gameStart = e => {
-        // console.log("gameStart",e);
-        if(e.offsetX > this.dataStore.get("startBtn").x && 
-            e.offsetX < this.dataStore.get("startBtn").x + this.dataStore.get("startBtn").width &&
-            e.offsetY > this.dataStore.get("startBtn").y &&
-            e.offsetY < this.dataStore.get("startBtn").y + this.dataStore.get("startBtn").height){
-                this.dataStore.distroy();
-                this.dataStore.GameOver = false;
-                this.dataStore.index = 0;
-                this.init();
-                this.dataStore.canvas.removeEventListener("click",this.gameStart);
-                this.run();
-            }
+      // console.log("gameStart",e);
+      e.offsetX = e.offsetX || e.changedTouches[0].clientX;
+      e.offsetY = e.offsetY || e.changedTouches[0].clientY;
+      if(e.offsetX > this.dataStore.get("startBtn").x && 
+          e.offsetX < this.dataStore.get("startBtn").x + this.dataStore.get("startBtn").width &&
+          e.offsetY > this.dataStore.get("startBtn").y &&
+          e.offsetY < this.dataStore.get("startBtn").y + this.dataStore.get("startBtn").height){
+              this.dataStore.distroy();
+              this.dataStore.GameOver = false;
+              this.dataStore.index = 0;
+              this.init();
+              // this.dataStore.canvas.removeEventListener("click",this.gameStart);
+              this.dataStore.canvas.removeEventListener("touchstart", this.gameStart);
+              this.run();
+          }
     }
+    //游戏结束,弹出开始界面
     gameEnd(){
-        this.dataStore.GameOver = true;
-                this.dataStore.set("startBtn",new StartBtn());
-                this.dataStore.canvas.addEventListener("click",this.gameStart);
-                this.dataStore.canvas.removeEventListener("touchstart",this.onTouchStart);
-                this.dataStore.canvas.removeEventListener("touchend",this.onTouchEnd);
+      this.dataStore.GameOver = true;
+      this.dataStore.set("startBtn",new StartBtn());
+      // this.dataStore.canvas.addEventListener("click",this.gameStart);
+      // this.dataStore.canvas.removeEventListener("click",this.onTouchStart);
+      this.dataStore.canvas.addEventListener("touchstart", this.gameStart);
+      this.dataStore.canvas.removeEventListener("touchstart",this.onTouchStart);
+      this.dataStore.canvas.removeEventListener("touchend",this.onTouchEnd);
     }
     // 执行方法
     run(){

@@ -10,7 +10,8 @@ export default class Main {
 	constructor(){
 		console.log("Game Start!");
 		//
-		this.canvas = document.querySelector('#canvas');
+		// this.canvas = document.querySelector('#canvas');
+    this.canvas = wx.createCanvas();
 		this.ctx = this.canvas.getContext('2d');
 		this.canvas.width =  window.innerWidth;
 		this.canvas.height = window.innerHeight;
